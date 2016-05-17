@@ -398,4 +398,37 @@ ULXPP.Funcs = {
 		
 		ulx.fancyLogAdmin(ply, "#A unconfused #T", targets)
 	end,
+	
+	respawn = function(ply, targets)
+		local caller = ply
+		
+		for k, ply in pairs(targets) do
+			if ply:Alive() then 
+				ULXPP.Error(caller, string.format('%s is not dead!', ply:Nick()))
+				targets[k] = nil
+				continue 
+			end
+			
+			ply:Spawn()
+		end
+		
+		ulx.fancyLogAdmin(ply, "#A respawned #T", targets)
+	end,
+	
+	frespawn = function(ply, targets)
+		local caller = ply
+		
+		for k, ply in pairs(targets) do
+			if ply:Alive() then 
+				ply:Kill()
+			end
+			
+			--Next frame
+			timer.Simple(0, function()
+				ply:Spawn()
+			end)
+		end
+		
+		ulx.fancyLogAdmin(ply, "#A respawned #T", targets)
+	end,
 }

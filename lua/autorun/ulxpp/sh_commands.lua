@@ -228,6 +228,18 @@ ULXPP.Declared = {
 		player = true,
 	},
 	
+	respawn = {
+		help = 'Respawns target(s) if they are dead',
+		category = 'ULXPP',
+		player = true,
+	},
+	
+	frespawn = {
+		help = 'Forces Respawn of target(s)',
+		category = 'ULXPP',
+		player = true,
+	},
+	
 	uid = {
 		help = 'Prints target(s) UniqueID',
 		category = 'ULXPP',
