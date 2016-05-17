@@ -19,6 +19,7 @@ util.AddNetworkString('ULXPP.sin')
 util.AddNetworkString('ULXPP.banish')
 util.AddNetworkString('ULXPP.coloredmessage')
 util.AddNetworkString('ULXPP.Profile')
+util.AddNetworkString('ULXPP.confuse')
 
 local C = ULib.cmds
 local UP = Vector(0, 0, 10000)
@@ -342,5 +343,59 @@ ULXPP.Funcs = {
 		net.Start('ULXPP.Profile')
 		net.WriteTable(targets)
 		net.Send(ply)
+	end,
+	
+	confuse = function(ply, targets)
+		local caller = ply
+		
+		for k, ply in pairs(targets) do
+			if ply.ULXPP_CONFUSED then 
+				ULXPP.Error(caller, string.format('%s is already confused!', ply:Nick()))
+				targets[k] = nil
+				continue 
+			end
+			
+			ply.ULXPP_CONFUSED = true
+			local id = tostring(ply) .. '_ulxpp_confuse'
+			
+			net.Start('ULXPP.confuse')
+			net.WriteBool(true)
+			net.Send(ply)
+			
+			hook.Add('Move', id, function(ply2, mv)
+				if not IsValid(ply) then
+					hook.Remove('Move', id)
+					return
+				end
+				
+				if ply2 ~= ply then return end
+				mv:SetSideSpeed(-mv:GetSideSpeed())
+			end)
+		end
+		
+		ulx.fancyLogAdmin(ply, "#A confused #T", targets)
+	end,
+	
+	unconfuse = function(ply, targets)
+		local caller = ply
+		
+		for k, ply in pairs(targets) do
+			if not ply.ULXPP_CONFUSED then 
+				ULXPP.Error(caller, string.format('%s is not confused!', ply:Nick()))
+				targets[k] = nil
+				continue 
+			end
+			
+			ply.ULXPP_CONFUSED = nil
+			local id = tostring(ply) .. '_ulxpp_confuse'
+			
+			net.Start('ULXPP.confuse')
+			net.WriteBool(false)
+			net.Send(ply)
+			
+			hook.Remove('Move', id)
+		end
+		
+		ulx.fancyLogAdmin(ply, "#A unconfused #T", targets)
 	end,
 }

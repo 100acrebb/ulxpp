@@ -216,6 +216,18 @@ ULXPP.Declared = {
 		player = true,
 	},
 	
+	confuse = {
+		help = 'Confuses target(s)',
+		category = 'ULXPP',
+		player = true,
+	},
+	
+	unconfuse = {
+		help = 'Unconfuses target(s)',
+		category = 'ULXPP',
+		player = true,
+	},
+	
 	uid = {
 		help = 'Prints target(s) UniqueID',
 		category = 'ULXPP',

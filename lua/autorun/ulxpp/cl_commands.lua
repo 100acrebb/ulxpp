@@ -30,6 +30,18 @@ net.Receive('ULXPP.sin', function()
 	end
 end)
 
+net.Receive('ULXPP.confuse', function()
+	local status = net.ReadBool()
+	
+	if status then
+		hook.Add('Move', 'ULXPP_CONFUSE', function(ply, mv)
+			mv:SetSideSpeed(-mv:GetSideSpeed())
+		end)
+	else
+		hook.Remove('Move', 'ULXPP_CONFUSE')
+	end
+end)
+
 net.Receive('ULXPP.banish', function()
 	ULXPP.BANISHED = net.ReadBool()
 end)

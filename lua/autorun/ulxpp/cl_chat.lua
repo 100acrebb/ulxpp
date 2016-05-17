@@ -34,12 +34,15 @@ local function FinishChat()
 end
 
 local Drawn = {}
+local curcommand = ''
+local curtoken = ''
 
 local function ChatTextChanged(str)
 	if not ENABLE:GetBool() then return end
 	local token = str[1]
 	Drawn = {}
 	if token ~= '/' and token ~= '!' then return end
+	curtoken = token
 	
 	local split = string.Explode(' ', str)
 	local find = string.sub(split[1], 2)
@@ -55,6 +58,7 @@ local function ChatTextChanged(str)
 	end
 	
 	Drawn[1] = 'ULX Chat Commands:'
+	local last
 	
 	local ply = LocalPlayer()
 	local total = 0
@@ -71,6 +75,8 @@ local function ChatTextChanged(str)
 		if table.HasValue(Drawn, format) then continue end --eh
 		total = total + 1
 		
+		last = ULXPP.UnpackCommand(v.cmd)
+		
 		table.insert(Drawn, format)
 	end
 	
@@ -78,6 +84,7 @@ local function ChatTextChanged(str)
 		Drawn[1] = 'No ULX command match.'
 	elseif total == 1 then
 		Drawn[1] = 'ULX Chat Command, to paste all missed arguments press TAB.'
+		curcommand = last
 	end
 end
 
@@ -122,7 +129,8 @@ local function OnChatTab(str)
 	local split1 = string.Explode(' ', str)
 	local split2 = string.Explode(' ', command)
 	
-	local output = str
+	split1[1] = curtoken .. curcommand
+	local output = table.concat(split1, ' ')
 	
 	for k, v in pairs(split2) do
 		if v == '-' then break end --We hit help end
