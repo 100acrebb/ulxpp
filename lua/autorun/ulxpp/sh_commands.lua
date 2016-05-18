@@ -82,7 +82,7 @@ function ENT:Think()
 	self:SetAngles(ang)
 	
 	if self.phys then
-		phys:ApplyForceCenter(normal:GetNormalized() * 10^10) --heh c:
+		self.phys:ApplyForceCenter(normal:GetNormalized() * 10^10) --heh c:
 	end
 	
 	if not ply:GetNWBool("Spectator") and ply:GetMoveType() ~= MOVETYPE_WALK then 
@@ -95,7 +95,7 @@ scripted_ents.Register(ENT, 'dbot_admin_train')
 ULXPP.Funcs = {}
 --Functions not called clientside
 if SERVER then
-	include('sv_commands.lua')
+	include('autorun/ulxpp/sv_commands.lua')
 end
 
 ULXPP.Declared = {

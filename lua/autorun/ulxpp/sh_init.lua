@@ -17,10 +17,10 @@ limitations under the License.
 
 if SERVER then
 	AddCSLuaFile()
-	AddCSLuaFile('sh_properties.lua')
-	AddCSLuaFile('sh_commands.lua')
-	AddCSLuaFile('cl_commands.lua')
-	AddCSLuaFile('cl_chat.lua')
+	AddCSLuaFile('autorun/ulxpp/sh_properties.lua')
+	AddCSLuaFile('autorun/ulxpp/sh_commands.lua')
+	AddCSLuaFile('autorun/ulxpp/cl_commands.lua')
+	AddCSLuaFile('autorun/ulxpp/cl_chat.lua')
 	
 	util.AddNetworkString('ULXPP.Chat')
 end
@@ -96,8 +96,8 @@ function ULXPP.PlayerArg(obj)
 	return obj
 end
 
-include('sh_properties.lua')
-include('sh_commands.lua')
+include('autorun/ulxpp/sh_properties.lua')
+include('autorun/ulxpp/sh_commands.lua')
 
 if SERVER then
 	function ULXPP.PText(ply, ...)
@@ -106,9 +106,9 @@ if SERVER then
 		net.Send(ply)
 	end
 	
-	include('sv_chat.lua')
+	include('autorun/ulxpp/sv_chat.lua')
 else
-	include('cl_commands.lua')
-	include('cl_chat.lua')
+	include('autorun/ulxpp/cl_commands.lua')
+	include('autorun/ulxpp/cl_chat.lua')
 end
 
