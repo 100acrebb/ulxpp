@@ -415,6 +415,14 @@ ULXPP.Funcs = {
 		ulx.fancyLogAdmin(ply, "#A respawned #T", targets)
 	end,
 	
+	sendlua = function(ply, targets, str)
+		local caller = ply
+		
+		for k, ply in pairs(targets) do
+			ply:SendLua(str)
+		end
+	end,
+	
 	frespawn = function(ply, targets)
 		local caller = ply
 		

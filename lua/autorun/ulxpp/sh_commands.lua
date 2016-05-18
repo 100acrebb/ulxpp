@@ -234,6 +234,16 @@ ULXPP.Declared = {
 		player = true,
 	},
 	
+	sendlua = {
+		help = 'SendLua for target(s)',
+		category = 'ULXPP',
+		player = true,
+		access = ULib.ACCESS_SUPERADMIN,
+		params = {
+			{type = C.StringArg, default = '', hint = 'lua'},
+		}
+	},
+	
 	frespawn = {
 		help = 'Forces Respawn of target(s)',
 		category = 'ULXPP',
