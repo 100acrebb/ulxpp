@@ -304,6 +304,20 @@ ULXPP.Declared = {
 			{type = C.NumArg, min = 1, max = 2 ^ 16, hint = 'power', C.round}
 		}
 	},
+	
+	bot = {
+		help = 'Creates bots',
+		category = 'ULXPP',
+		access = ULib.ACCESS_SUPERADMIN,
+		params = {
+			{type = C.NumArg, min = 1, max = 32, hint = 'number', C.round, C.optional, default = 1}
+		}
+	},
+	
+	kickbots = {
+		help = 'Kicks all bots',
+		category = 'ULXPP',
+	},
 }
 
 for k, v in pairs(ULXPP.Declared) do

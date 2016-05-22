@@ -439,4 +439,24 @@ ULXPP.Funcs = {
 		
 		ulx.fancyLogAdmin(ply, "#A respawned #T", targets)
 	end,
+	
+	bot = function(ply, num)
+		num = num or 1
+		
+		for i = 1, num do
+			RunConsoleCommand('bot')
+		end
+		
+		ulx.fancyLogAdmin(ply, "#A created #i bots", num)
+	end,
+	
+	kickbots = function(ply)
+		for k, v in pairs(player.GetAll()) do
+			if v:IsBot() then
+				v:Kick('Kicked bot from server')
+			end
+		end
+		
+		ulx.fancyLogAdmin(ply, "#A kicked all bots from server")
+	end,
 }
